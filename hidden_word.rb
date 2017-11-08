@@ -15,5 +15,14 @@ class HiddenWord
       @display_word = word_array.join
     end
 
+    def letter_in_word(guessed_letter, word_to_guess)
+      word_array = word_to_guess.split(//)
+        for letter in word_array
+          if letter == guessed_letter
+            return true
+          end
+        end
+        return false
+    end
 
 end
