@@ -36,6 +36,9 @@ class TestPlayer < MiniTest::Test
   end
 
   def test_change_star_to_letter
-    
+    @game.letter_guess("p")
+    received_letter = @hidden_word1.receive_letter(@game)
+    @hidden_word1.change_star_to_letter(received_letter, @hidden_word1.word_to_guess, @hidden_word1.display_word)
+    assert_equal("**p**p", @hidden_word1.display_word)
   end
 end

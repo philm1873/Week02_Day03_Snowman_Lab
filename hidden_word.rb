@@ -35,7 +35,8 @@ class HiddenWord
       index = 0
       for letter in word_array
         if letter != guessed_letter
-          index += 1
+          starred_word_array[index] = "*"
+          index += 1          
         else
           starred_word_array[index] = guessed_letter
           index += 1

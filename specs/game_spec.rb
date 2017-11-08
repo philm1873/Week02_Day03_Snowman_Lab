@@ -20,4 +20,9 @@ class TestGame < MiniTest::Test
     @game.letter_guess("z")
     assert_equal(1, @game.guessed_letters.length)
   end
+
+  def test_game_win_or_lose__lose
+    
+    assert_equal("Sorry, you've lost :(", @game)
+  end
 end
