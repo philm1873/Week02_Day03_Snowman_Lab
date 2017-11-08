@@ -6,8 +6,8 @@ class Player
     @lives = 6
   end
 
-  def guess()
-    
+  def guess(decision)
+    @lives -= 1 if decision == false
   end
 
 end

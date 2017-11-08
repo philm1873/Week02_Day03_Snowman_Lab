@@ -22,11 +22,20 @@ class TestPlayer < MiniTest::Test
   def test_guesses_letter__correct
     @game.letter_guess("a")
     received_letter = @hidden_word1.receive_letter(@game)
-    @hidden_word1.letter_in_word(received_letter,@hidden_word1.word_to_guess)
-    @player.guess()
+    letter_decision = @hidden_word1.letter_in_word(received_letter,@hidden_word1.word_to_guess)
+    @player.guess(letter_decision)
     assert_equal(6, @player.lives)
   end
 
-  # def test_guesses_letter__incorrect
-  # end
+  def test_guesses_letter__incorrect
+    @game.letter_guess("z")
+    received_letter = @hidden_word1.receive_letter(@game)
+    letter_decision = @hidden_word1.letter_in_word(received_letter,@hidden_word1.word_to_guess)
+    @player.guess(letter_decision)
+    assert_equal(5, @player.lives)
+  end
+
+  def test_change_star_to_letter
+    
+  end
 end

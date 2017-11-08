@@ -29,4 +29,19 @@ class HiddenWord
         return false
     end
 
+    def change_star_to_letter(guessed_letter, word_to_guess, starred_word)
+      word_array = word_to_guess.split(//)
+      starred_word_array = starred_word.split(//)
+      index = 0
+      for letter in word_array
+        if letter != guessed_letter
+          index += 1
+        else
+          starred_word_array[index] = guessed_letter
+          index += 1
+        end
+        @display_word = starred_word_array.join
+      end
+    end
+
 end
