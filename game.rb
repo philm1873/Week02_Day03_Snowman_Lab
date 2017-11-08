@@ -6,4 +6,12 @@ class Game
     @hidden_word = input_hidden_word
     @guessed_letters = []
   end
+
+  def letter_guess(letter)
+    @guessed_letters.unshift(letter)
+  end
+
+
+
+
 end

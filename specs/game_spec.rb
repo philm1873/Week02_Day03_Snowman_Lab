@@ -15,4 +15,9 @@ class TestGame < MiniTest::Test
     assert_equal(6, @game.player.lives)
     assert_equal("Catriona", @game.player.name)
   end
+
+  def test_received_letter__first
+    @game.letter_guess("z")
+    assert_equal(1, @game.guessed_letters.length)
+  end
 end
