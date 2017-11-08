@@ -15,6 +15,10 @@ class HiddenWord
       @display_word = word_array.join
     end
 
+    def receive_letter(game)
+      game.guessed_letters[0]
+    end
+
     def letter_in_word(guessed_letter, word_to_guess)
       word_array = word_to_guess.split(//)
         for letter in word_array

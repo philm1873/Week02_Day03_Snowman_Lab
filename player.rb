@@ -5,4 +5,9 @@ class Player
     @name = input_name
     @lives = 6
   end
+
+  def guess()
+    
+  end
+
 end
