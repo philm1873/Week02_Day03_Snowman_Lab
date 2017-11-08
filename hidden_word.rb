@@ -34,12 +34,13 @@ class HiddenWord
       starred_word_array = starred_word.split(//)
       index = 0
       for letter in word_array
-        if letter != guessed_letter
-          starred_word_array[index] = "*"
-          index += 1          
-        else
-          starred_word_array[index] = guessed_letter
-          index += 1
+        if letter == "*" && letter != guessed_letter
+            index += 1
+          elsif letter == "*" && letter == guessed_letter
+            starred_word_array[index] = guessed_letter
+            index += 1
+          else
+            index += 1
         end
         @display_word = starred_word_array.join
       end

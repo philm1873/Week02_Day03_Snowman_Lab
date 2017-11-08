@@ -41,4 +41,22 @@ class TestPlayer < MiniTest::Test
     @hidden_word1.change_star_to_letter(received_letter, @hidden_word1.word_to_guess, @hidden_word1.display_word)
     assert_equal("**p**p", @hidden_word1.display_word)
   end
+
+  def test_change_star_to_letter__second_letter
+    @game.letter_guess("p")
+    received_letter = @hidden_word1.receive_letter(@game)
+    @hidden_word1.change_star_to_letter(received_letter, @hidden_word1.word_to_guess, @hidden_word1.display_word)
+    @game.letter_guess("l")
+    received_letter = @hidden_word1.receive_letter(@game)
+    @hidden_word1.change_star_to_letter(received_letter, @hidden_word1.word_to_guess, @hidden_word1.display_word)
+    assert_equal("l*p**p", @hidden_word1.display_word)
+  end
+  
+  def test_change_star_to_letter__wrong_letter
+    @game.letter_guess("z")
+    received_letter = @hidden_word1.receive_letter(@game)
+    @hidden_word1.change_star_to_letter(received_letter, @hidden_word1.word_to_guess, @hidden_word1.display_word)
+    assert_equal("******", @hidden_word1.display_word)
+  end
+
 end
