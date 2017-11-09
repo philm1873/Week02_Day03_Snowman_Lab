@@ -7,56 +7,13 @@ require_relative("../hidden_word.rb")
 class TestPlayer < MiniTest::Test
   def setup
     @player = Player.new("Catriona")
-    @hidden_word1 = HiddenWord.new("laptop")
-    @game = Game.new(@player, @hidden_word1)
+    @hidden_word = HiddenWord.new("laptop")
+    @game = Game.new(@player, @hidden_word)
   end
 
-  def test_get_player_name
-    assert_equal("Catriona", @player.name)
-  end
-
-  def test_get_lives__start
-    assert_equal(6, @player.lives)
-  end
-
-  def test_guesses_letter__correct
-    @game.letter_guess("a")
-    received_letter = @hidden_word1.receive_letter(@game)
-    letter_decision = @hidden_word1.letter_in_word(received_letter,@hidden_word1.word_to_guess)
-    @player.guess(letter_decision)
-    assert_equal(6, @player.lives)
-  end
-
-  def test_guesses_letter__incorrect
-    @game.letter_guess("z")
-    received_letter = @hidden_word1.receive_letter(@game)
-    letter_decision = @hidden_word1.letter_in_word(received_letter,@hidden_word1.word_to_guess)
-    @player.guess(letter_decision)
+  def test_lose_life
+    @player.lose_life
     assert_equal(5, @player.lives)
-  end
-
-  def test_change_star_to_letter
-    @game.letter_guess("p")
-    received_letter = @hidden_word1.receive_letter(@game)
-    @hidden_word1.change_star_to_letter(received_letter, @hidden_word1.word_to_guess, @hidden_word1.display_word)
-    assert_equal("**p**p", @hidden_word1.display_word)
-  end
-
-  def test_change_star_to_letter__second_letter
-    @game.letter_guess("p")
-    received_letter = @hidden_word1.receive_letter(@game)
-    @hidden_word1.change_star_to_letter(received_letter, @hidden_word1.word_to_guess, @hidden_word1.display_word)
-    @game.letter_guess("l")
-    received_letter = @hidden_word1.receive_letter(@game)
-    @hidden_word1.change_star_to_letter(received_letter, @hidden_word1.word_to_guess, @hidden_word1.display_word)
-    assert_equal("l*p**p", @hidden_word1.display_word)
-  end
-  
-  def test_change_star_to_letter__wrong_letter
-    @game.letter_guess("z")
-    received_letter = @hidden_word1.receive_letter(@game)
-    @hidden_word1.change_star_to_letter(received_letter, @hidden_word1.word_to_guess, @hidden_word1.display_word)
-    assert_equal("******", @hidden_word1.display_word)
   end
 
 end

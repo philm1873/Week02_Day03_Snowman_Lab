@@ -7,52 +7,24 @@ require_relative("../player.rb")
 class TestHiddenWord < MiniTest::Test
 
   def setup
-    @player1 = Player.new("Catriona")
-    @hidden_word1 = HiddenWord.new("laptop")
-    @hidden_word2 = HiddenWord.new("whatever")
-    @game = Game.new(@player1, @hidden_word1)
+    @player = Player.new("Catriona")
+    @hidden_word = HiddenWord.new("laptop mac")
+    @game = Game.new(@player, @hidden_word)
   end
 
-  def test_get_word_to_guess
-    assert_equal("laptop", @hidden_word1.word_to_guess)
+  def test_display_word__start
+    result = @hidden_word.display_word(@game.guessed_letters)
+    assert_equal("****** ***", result)
   end
 
-  def test_get_display_word__start
-    assert_equal("", @hidden_word1.display_word)
+  def test_display_word__first_guess
+    result = @hidden_word.display_word(["a"])
+    assert_equal("*a**** *a*", result)
   end
 
-  def test_return_star_word__word1
-    @hidden_word1.star_word(@hidden_word1.word_to_guess)
-    assert_equal("******", @hidden_word1.display_word)
+  def test_display_word__second_guess
+    result1 = @hidden_word.display_word(["a"])
+    result2 = @hidden_word.display_word(["p", "a"])
+    assert_equal("*ap**p *a*", result2)
   end
-
-  def test_return_star_word__word2
-    @hidden_word2.star_word(@hidden_word2.word_to_guess)
-    assert_equal("********", @hidden_word2.display_word)
-  end
-
-  def test_letter_in_word__true
-    result = @hidden_word1.letter_in_word("a", @hidden_word1.word_to_guess)
-    assert_equal(true, result)
-  end
-
-  def test_letter_in_word__false
-    result = @hidden_word1.letter_in_word("z", @hidden_word1.word_to_guess)
-    assert_equal(false, result)
-  end
-
-  def test_game_passing_letter
-    @game.letter_guess("a")
-    passed_letter = @game.guessed_letters[0]
-    assert_equal("a", passed_letter)
-  end
-
-
-
-
-
-
-
-
-
 end

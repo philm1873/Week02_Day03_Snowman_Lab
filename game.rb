@@ -7,16 +7,13 @@ class Game
     @guessed_letters = []
   end
 
-  def letter_guess(letter)
+  def guess(letter)
     @guessed_letters.unshift(letter)
-  end
-
-  def win_or_lose(player, hidden_word)
-    if player.lives == 0
-      return "Sorry, you've lost :("
-    elsif hidden_word.word_to_guess == hidden_word.display_word
-      return "Hooray, you've won!"
+    word_array = @hidden_word.word_to_guess.split(//)
+    for char in word_array
+      return if char == letter
     end
+    @player.lose_life
   end
 
 
