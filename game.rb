@@ -16,5 +16,16 @@ class Game
     @player.lose_life
   end
 
+  def game_lost
+    return @player.lives == 0
+  end
+
+  def game_won
+    word_array = @hidden_word.word_to_guess.split(//)
+    for char in word_array
+      return false if char == "*"
+    end
+    return true
+  end
 
 end

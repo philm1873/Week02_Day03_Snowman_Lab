@@ -12,14 +12,30 @@ class TestGame < MiniTest::Test
   end
 
   def test_guess__fail
-    result = @game.guess("z")
+    @game.guess("z")
     assert_equal(1, @game.guessed_letters.length)
     assert_equal(5, @player.lives)
   end
 
   def test_guess__pass
-    result = @game.guess("a")
+    @game.guess("a")
     assert_equal(1, @game.guessed_letters.length)
     assert_equal(6, @player.lives)
   end
+
+  def test_game_lost
+    @player.lives = 0
+    assert_equal(true, @game.game_lost)
+  end
+
+  def test_game_won__false
+    @hidden_word.word_to_guess = "l*ptop"
+    assert_equal(false, @game.game_won)
+  end
+
+  def test_game_won__false
+    @hidden_word.word_to_guess = "laptop"
+    assert_equal(true, @game.game_won)
+  end
+
 end

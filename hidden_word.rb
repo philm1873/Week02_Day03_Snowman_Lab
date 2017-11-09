@@ -1,6 +1,6 @@
 class HiddenWord
-
-  attr_reader :word_to_guess, :display_word
+  attr_reader :display_word
+  attr_accessor :word_to_guess
 
   def initialize(input_word)
     @word_to_guess = input_word
